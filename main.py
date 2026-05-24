@@ -55,15 +55,29 @@ class neural_network(nn.Module):
         x = self.linear4(x)
         return x
 
-generations = 2
+generations = 50
 model = neural_network()
 loss_func = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(),lr=0.001)
 
 for i in range(generations):
+    model.train()
+    total_train_loss = 0
     for batch_data,batch_labels in train_dataloader:
         output = model(batch_data)
         loss = loss_func(output,batch_labels)
+        total_train_loss+=loss.item()
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
+    model.eval()
+    total_val_loss=0
+    with torch.no_grad():
+        for batch_data,batch_labels in val_dataloader:
+            output = model(batch_data)
+            loss_val = loss_func(output,batch_labels)
+            total_val_loss += loss_val.item()
+    print(f"Average training loss: {total_train_loss/len(train_dataloader)}\n")
+    print(f"Average validation loss: {total_val_loss/len(val_dataloader)}\n")
+
+
