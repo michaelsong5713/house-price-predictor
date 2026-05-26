@@ -8,6 +8,8 @@ Fourth machine learning project. Using neural networks to predict housing prices
 
 **Before tuning**
 ![Performance Plots](performance_plots.png)
+**After tuning**
+![Performance Plots](performance_plots3.png)
 
 ---
 

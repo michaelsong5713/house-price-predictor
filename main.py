@@ -60,10 +60,10 @@ for i in range(runs):
             x = self.linear4(x)
             return x
 
-    generations = 15
+    generations = 20
     model = neural_network()
     loss_func = nn.MSELoss()
-    optimizer = torch.optim.Adam(model.parameters(),lr=0.001)
+    optimizer = torch.optim.Adam(model.parameters(),lr=0.005)
 
     for i in range(generations):
         model.train()
@@ -133,5 +133,5 @@ ax2.grid(True)
 
 plt.suptitle('Model Performance Across Runs', fontsize=14)
 plt.tight_layout()
-plt.savefig('performance_plots.png', dpi=150, bbox_inches='tight')
+plt.savefig('performance_plots3.png', dpi=150, bbox_inches='tight')
 plt.show()
